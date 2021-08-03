@@ -12,7 +12,7 @@ public class MenuPrincipal {
   }
 
   public static void menuPrincipal() {
-    int opcion = -1;
+    int opcion;
 
     do {
       System.out.println("[1] ENTRAR COMO VENDEDOR");
@@ -21,25 +21,24 @@ public class MenuPrincipal {
       System.out.println("[0] SALIR");
       opcion = new Scanner(System.in).nextInt();
       switch (opcion) {
-        case 1:
-          //Entrar como vendedor
+        case 1: {
+          entrarComoVendedorMenu();
           break;
-
-        case 2:
-
-          //Entrar como cliente
+        }
+        case 2: {
+          entrarComoClienteMenu();
           break;
-
-        case 3:
-          System.out.println("::Menu");
-          System.out.println("::REGISTRARSE");
+        }
+        case 3: {
           MenuRegistro.menuRegistrarse();
           break;
-        case 0:
-          System.out.println("Adios...");
+        }
+        case 0: {
+          System.out.println("Adios, vuelva pronto");
           break;
+        }
         default:
-          System.out.println("Ingrese una opcion correcta");
+          System.out.println("Ingrese una opcion valida");
       }
 
     } while (opcion != 0);
@@ -48,106 +47,90 @@ public class MenuPrincipal {
 
   private static void entrarComoVendedorMenu() {
     //Entrar como vendedor
-    int opcion;
-    System.out.println("::Menu");
-    System.out.println("::ENTRAR COMO VENDEDOR");
-    System.out.println("[1] Continuar");
-    System.out.println("[0] Retornar");
-    opcion = new Scanner(System.in).nextInt();
-    switch (opcion) {
-      case 0:
+    String usuarioVendedor;
+    String contraseniaVendedor;
 
-        menuPrincipal();
+    //pedimos usuario y contraseña
+    System.out.print("Usuario: ");
+    usuarioVendedor = new Scanner(System.in).nextLine();
+    System.out.print("Contraseña: ");
+    contraseniaVendedor = new Scanner(System.in).nextLine();
+
+    boolean usuarioExistente = false;
+    //Verificamos que el vendedor esté registrado
+    for (Vendedor vendedor : App.vendedoresRegistrados) {
+      if (vendedor.getUsuario().equals(usuarioVendedor) && vendedor.getContraseña().equals(contraseniaVendedor)) {
+        usuarioExistente = true;
         break;
-
-      case 1:
-
-        String usuario;
-        String contraseña;
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("\nIngrese usuario: ");
-        usuario = input.nextLine();
-        System.out.print("Ingrese contraseña: ");
-        contraseña = input.nextLine();
-
-        boolean registrado = false;
-        //comprobar que el usuario y la contraseña pertenezcan a un vendedor registrado
-        for (Vendedor vendedor : App.vendedoresRegistrados) {
-          if (vendedor.getUsuario().equals(usuario) && vendedor.getContraseña().equals(contraseña)) {
-            registrado = true;
-            break;
-          }
-        }
-        if (registrado) { //si esta registrado le damos pase al menu Vendedor
-
-        } else { //
-          System.out.println("Usuario o contraseña incorrecta");
-          entrarComoVendedorMenu();
-        }
-        break;
-
-      default:
-
-        System.out.println("Ingrese una opcion valida");
-        break;
-
+      }
     }
 
+    if (usuarioExistente) {
+      MenuVendedor.menuVendedor();
+    } else {
+      int opcion2 = 0;
+      do {
+        System.out.println("Su contraseña o usuario está mal escrito, porfavor vuelva a intentarlo");
+        System.out.println("[1] Aceptar");
+        System.out.println("[0] Cancelar");
+        opcion2 = new Scanner(System.in).nextInt();
+        switch (opcion2) {
+          case 1:
+            entrarComoVendedorMenu();
+            break;
+          case 0:
+            menuPrincipal();
+            break;
+          default:
+            System.out.println("Ingrese opcion correcta");
+            break;
+        }
+      } while (opcion2 != 0);
+    }
   }
 
   private static void entrarComoClienteMenu() {
 
-    int opcion;
-    System.out.println("::Menu");
-    System.out.println("::ENTRAR COMO CLIENTE");
-    System.out.println("[1] Continuar");
-    System.out.println("[0] Retornar");
-    opcion = new Scanner(System.in).nextInt();
-    switch (opcion) {
-      case 0:
+    String usuarioCliente;
+    String contraseniaCliente;
 
-        menuPrincipal();
+    //pedimos usuario y contraseña
+    System.out.print("Usuario: ");
+    usuarioCliente = new Scanner(System.in).nextLine();
+    System.out.print("Contraseña: ");
+    contraseniaCliente = new Scanner(System.in).nextLine();
+
+    boolean usuarioExistente = false;
+    //Verificamos que el cliente esté registrado
+    for (Cliente cliente : App.clientesRegistrados) {
+      if (cliente.getUsuario().equals(usuarioCliente) && cliente.getContraseña().equals(contraseniaCliente)) {
+        usuarioExistente = true;
         break;
-
-      case 1:
-
-        String usuarioCliente;
-        String contraseñaCliente;
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("\nIngrese usuario: ");
-        usuarioCliente = input.nextLine();
-        System.out.print("Ingrese contraseña: ");
-        contraseñaCliente = input.nextLine();
-
-        boolean registrado = false;
-        //comprobar que el usuario y la contraseña pertenezcan a un cliente registrado
-        for (Cliente cliente : App.clientesRegistrados) {
-          if (cliente.getUsuario().equals(usuarioCliente) && cliente.getContraseña().equals(contraseñaCliente)) {
-            registrado = true;
-            break;
-          }
-        }
-        if (registrado) { //si esta registrado le damos pase al menu Cliente
-
-        } else { //
-          System.out.println("Usuario o contraseña incorrecta");
-          entrarComoClienteMenu();
-        }
-        break;
-
-      default:
-
-        System.out.println("Ingrese una opcion valida");
-        break;
-
+      }
     }
-  }
 
-  private static void registrarse() {
-    System.out.println("[1] Registrarse como vendedor");
-    System.out.println("[2] Registrarse como cliente");
+    if (usuarioExistente) {
+      MenuCliente.menuCliente();
+    } else {
+      int opcion2 = 0;
+      do {
+        System.out.println("Su contraseña o usuario está mal escrito, porfavor vuelva a intentarlo");
+        System.out.println("[1] Aceptar");
+        System.out.println("[0] Cancelar");
+        opcion2 = new Scanner(System.in).nextInt();
+        switch (opcion2) {
+          case 1:
+            entrarComoClienteMenu();
+            break;
+          case 0:
+            menuPrincipal();
+            break;
+          default:
+            System.out.println("Ingrese opcion correcta");
+            break;
+        }
+      } while (opcion2 != 0);
+    }
   }
 
 }

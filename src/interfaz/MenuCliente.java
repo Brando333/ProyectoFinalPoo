@@ -1,5 +1,8 @@
 package interfaz;
 
+import domain.Producto;
+import java.util.Scanner;
+
 public class MenuCliente {
 
   //Las clases de utileria no deberian tener constructores
@@ -17,13 +20,21 @@ public class MenuCliente {
   }
 
   private static void mostrarInventario() {
-    //MUESTRA INVENTARIO -> nombres del producto y precio
+    //MUESTRA INVENTARIO 
+//    for (Producto producto : col) {
+//      
+//    }
+        
   }
 
   private static void hacerCompraMenu() {
 
     //mostrar inventario
+    String contraseñaDefault ="camote123";
+    String userDefault ="Brando123";
     System.out.println("¿Que producto desea añadir al carrito?");
+    String producto = new Scanner(System.in).next();
+    
 
     System.out.println("¿Cuantos productos {$producto} desea añadir");
 

@@ -1,13 +1,14 @@
 package interfaz;
 
+import domain.Ventas;
+
 public class MenuVendedor {
 
   //Las clases de Utileria no deberian poder instanciarse
-  
   private MenuVendedor() {
   }
 
-  private static void menuVendedor() {
+  public static void menuVendedor() {
     System.out.println("MENU");
     System.out.println("[1] MOSTRAR VENTAS");
     System.out.println("[2] MOSTRAR INVENTARIO");
@@ -17,6 +18,8 @@ public class MenuVendedor {
 
   private static void mostrarVentas() {
     //mostrar ventas
+    
+ 
     System.out.println("[0] Retornar");
   }
 
