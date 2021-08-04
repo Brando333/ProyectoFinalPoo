@@ -7,14 +7,14 @@ public class Usuario {
   private String nombre;
   private String dni;
   private String usuario;
-  private String contraseña;
+  private String contrasenia;
 
   /*Constructor*/
-  public Usuario(String nombre, String dni, String usuario, String contraseña) {
+  public Usuario(String nombre, String dni, String usuario, String contrasenia) {
     this.nombre = nombre;
     this.dni = dni;
     this.usuario = usuario;
-    this.contraseña = contraseña;
+    this.contrasenia = contrasenia;
   }
 
   /*Setters & Getters*/
@@ -42,18 +42,18 @@ public class Usuario {
     this.usuario = usuario;
   }
 
-  public String getContraseña() {
-    return contraseña;
+  public String getContrasenia() {
+    return contrasenia;
   }
 
-  public void setContraseña(String contraseña) {
-    this.contraseña = contraseña;
+  public void setContrasenia(String contrasenia) {
+    this.contrasenia = contrasenia;
   }
 
   /*toString*/
   @Override
   public String toString() {
-    return "Usuario{" + "nombre=" + nombre + ", dni=" + dni + ", usuario=" + usuario + ", contraseña=" + contraseña + '}';
+    return "Usuario{" + "nombre=" + nombre + ", dni=" + dni + ", usuario=" + usuario + ", contraseña=" + contrasenia + '}';
   }
 
 }

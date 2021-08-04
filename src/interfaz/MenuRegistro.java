@@ -17,30 +17,32 @@ public class MenuRegistro {
 
   static void menuRegistrarse() {
     int opcion;
-    System.out.println("::Menu");
+    System.out.println("\n::Menu Principal");
     System.out.println("::Registro");
     System.out.println("[1] Registrarse como vendedor");
     System.out.println("[2] Registrarse como cliente");
     System.out.println("[0] Retornar");
     opcion = new Scanner(System.in).nextInt();
+    exitDo:
+    do {
+      switch (opcion) {
+        case 1:
+          registrarseComoVendedor();
+          break exitDo;
 
-    switch (opcion) {
-      case 1:
-        registrarseComoVendedor();
-        break;
+        case 2:
+          registrarseComoCliente();
+          break exitDo;
 
-      case 2:
-        registrarseComoCliente();
-        break;
+        case 0:
+          MenuPrincipal.menuPrincipal();
+          break exitDo;
 
-      case 0:
-        MenuPrincipal.menuPrincipal();
-        break;
+        default:
+          System.out.println("Ingrese una opcion valida");
 
-      default:
-        System.out.println("Ingrese una opcion valida");
-
-    }
+      }
+    } while (true);
   }
 
   private static void registrarseComoVendedor() {
@@ -52,25 +54,42 @@ public class MenuRegistro {
     System.out.println("[1] Continuar");
     System.out.println("[0] Cancelar");
     opcion = new Scanner(System.in).nextInt();
+    exitDo:
     do {
       switch (opcion) {
         case 1:
+          Scanner input = new Scanner(System.in);
 
-          nuevoVendedor = ( Vendedor )registroUsuario(); //DownCast de Usuario a Vendedor
+          String nombreComleto;
+          String dni;
+          String usuario;
+          String contraseña;
+
+          System.out.print("\nIngrese su nombre completo: ");
+          nombreComleto = input.nextLine();
+          System.out.print("\nIngrese su dni: ");
+          dni = input.nextLine();
+          System.out.print("\nIngrese su nombre de usuario: ");
+          usuario = input.nextLine();
+          System.out.print("\nIngrese su contraseña: ");
+          contraseña = input.nextLine();
+
+          nuevoVendedor = new Vendedor(usuario, dni, usuario, contraseña);
+//          nuevoVendedor = (( Vendedor )registroUsuario()); //DownCast de Usuario a Vendedor
           //Añadimos nuevoVendedor a un Arreglo de {VendedoresRegistrados}
           App.vendedoresRegistrados.add(nuevoVendedor);
           System.out.println("Su registro ha sido guardado con exito");
-          break;
+          break exitDo;
 
         case 0:
           MenuPrincipal.menuPrincipal();
-          break;
+          break exitDo;
 
         default:
           System.out.println("Ingrese una opcion valida");
 
       }
-    } while (opcion != 0);
+    } while (true);
 
   }
 
@@ -83,25 +102,43 @@ public class MenuRegistro {
     System.out.println("[1] Continuar");
     System.out.println("[0] Cancelar");
     opcion = new Scanner(System.in).nextInt();
+    exitDo:
     do {
       switch (opcion) {
         case 1:
 
-          nuevoCliente = ( Cliente )registroUsuario(); //DownCast de Usuario a Cliente
-          //Añadimos nuevoVendedor a un Arreglo de {VendedoresRegistrados}
+          Scanner input = new Scanner(System.in);
+
+          String nombreComleto;
+          String dni;
+          String usuario;
+          String contraseña;
+
+          System.out.print("\nIngrese su nombre completo: ");
+          nombreComleto = input.nextLine();
+          System.out.print("\nIngrese su dni: ");
+          dni = input.nextLine();
+          System.out.print("\nIngrese su nombre de usuario: ");
+          usuario = input.nextLine();
+          System.out.print("\nIngrese su contraseña: ");
+          contraseña = input.nextLine();
+
+          nuevoCliente = new Cliente(usuario, dni, usuario, contraseña);
+//          nuevoCliente = (( Cliente )registroUsuario()); //DownCast de Usuario a Cliente
+//          Añadimos nuevoVendedor a un Arreglo de {VendedoresRegistrados}
           App.clientesRegistrados.add(nuevoCliente);
           System.out.println("Su registro ha sido guardado con exito");
-          break;
+          break exitDo;
 
         case 0:
           MenuPrincipal.menuPrincipal();
-          break;
+          break exitDo;
 
         default:
           System.out.println("Ingrese una opcion valida");
 
       }
-    } while (opcion != 0);
+    } while (true);
 
   }
 

@@ -12,8 +12,8 @@ public class MenuPrincipal {
   }
 
   public static void menuPrincipal() {
+    System.out.println("\n::Menu Principal");
     int opcion;
-
     do {
       System.out.println("[1] ENTRAR COMO VENDEDOR");
       System.out.println("[2] ENTRAR COMO CLIENTE");
@@ -34,14 +34,13 @@ public class MenuPrincipal {
           break;
         }
         case 0: {
-          System.out.println("Adios, vuelva pronto");
-          break;
+          System.exit(0);
         }
         default:
           System.out.println("Ingrese una opcion valida");
       }
 
-    } while (opcion != 0);
+    } while (true);
 
   }
 
@@ -59,7 +58,7 @@ public class MenuPrincipal {
     boolean usuarioExistente = false;
     //Verificamos que el vendedor esté registrado
     for (Vendedor vendedor : App.vendedoresRegistrados) {
-      if (vendedor.getUsuario().equals(usuarioVendedor) && vendedor.getContraseña().equals(contraseniaVendedor)) {
+      if (vendedor.getUsuario().equals(usuarioVendedor) && vendedor.getContrasenia().equals(contraseniaVendedor)) {
         usuarioExistente = true;
         break;
       }
@@ -68,7 +67,8 @@ public class MenuPrincipal {
     if (usuarioExistente) {
       MenuVendedor.menuVendedor();
     } else {
-      int opcion2 = 0;
+      int opcion2;
+      exitDo:
       do {
         System.out.println("Su contraseña o usuario está mal escrito, porfavor vuelva a intentarlo");
         System.out.println("[1] Aceptar");
@@ -77,15 +77,15 @@ public class MenuPrincipal {
         switch (opcion2) {
           case 1:
             entrarComoVendedorMenu();
-            break;
+            break exitDo;
           case 0:
             menuPrincipal();
-            break;
+            break exitDo;
           default:
             System.out.println("Ingrese opcion correcta");
-            break;
+            break exitDo;
         }
-      } while (opcion2 != 0);
+      } while (true);
     }
   }
 
@@ -103,7 +103,7 @@ public class MenuPrincipal {
     boolean usuarioExistente = false;
     //Verificamos que el cliente esté registrado
     for (Cliente cliente : App.clientesRegistrados) {
-      if (cliente.getUsuario().equals(usuarioCliente) && cliente.getContraseña().equals(contraseniaCliente)) {
+      if (cliente.getUsuario().equals(usuarioCliente) && cliente.getContrasenia().equals(contraseniaCliente)) {
         usuarioExistente = true;
         break;
       }
@@ -112,7 +112,8 @@ public class MenuPrincipal {
     if (usuarioExistente) {
       MenuCliente.menuCliente();
     } else {
-      int opcion2 = 0;
+      int opcion2;
+      exitDo:
       do {
         System.out.println("Su contraseña o usuario está mal escrito, porfavor vuelva a intentarlo");
         System.out.println("[1] Aceptar");
@@ -121,15 +122,14 @@ public class MenuPrincipal {
         switch (opcion2) {
           case 1:
             entrarComoClienteMenu();
-            break;
+            break exitDo;
           case 0:
             menuPrincipal();
-            break;
+            break exitDo;
           default:
             System.out.println("Ingrese opcion correcta");
-            break;
         }
-      } while (opcion2 != 0);
+      } while (true);
     }
   }
 

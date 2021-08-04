@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.stream.IntStream;
-
 public class Producto {
 
   private static int contadorProducto = 0;
@@ -9,7 +7,7 @@ public class Producto {
    * Atributos
    */
 
-  private final int idProducto;
+  private final String idProducto;
   private String nombreProducto;
   private double precioProducto;
 
@@ -19,8 +17,7 @@ public class Producto {
   public Producto(String nombreProducto, double precioProducto) {
     this.nombreProducto = nombreProducto;
     this.precioProducto = precioProducto;
-
-    idProducto = ++contadorProducto;
+    idProducto = Long.toHexString(Integer.hashCode(++contadorProducto) * 3);//Crea un id
   }
 
   /**
@@ -34,7 +31,7 @@ public class Producto {
     this.precioProducto = precioProducto;
   }
 
-  public int getIdProducto() {
+  public String getIdProducto() {
     return idProducto;
   }
 

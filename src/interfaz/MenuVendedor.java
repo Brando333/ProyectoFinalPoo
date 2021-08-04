@@ -1,6 +1,6 @@
 package interfaz;
 
-import domain.Ventas;
+import java.util.Scanner;
 
 public class MenuVendedor {
 
@@ -9,17 +9,45 @@ public class MenuVendedor {
   }
 
   public static void menuVendedor() {
-    System.out.println("MENU");
-    System.out.println("[1] MOSTRAR VENTAS");
-    System.out.println("[2] MOSTRAR INVENTARIO");
-    System.out.println("[3] MOSTRAR CLIENTES");
-    System.out.println("[0] RETORNAR");
+
+    int opcion;
+    exitDo:
+    do {
+      System.out.println("\n::Menu principal");
+      System.out.println("::Menu vendedor");
+      System.out.println("[1] MOSTRAR VENTAS");
+      System.out.println("[2] MOSTRAR INVENTARIO");
+      System.out.println("[3] MOSTRAR CLIENTES");
+      System.out.println("[0] RETORNAR");
+      opcion = new Scanner(System.in).nextInt();
+
+      switch (opcion) {
+        case 1:
+
+          break exitDo;
+
+        case 2:
+
+          break exitDo;
+
+        case 3:
+
+          break exitDo;
+
+        case 0:
+          MenuPrincipal.menuPrincipal();
+          break exitDo;
+
+        default:
+          System.out.println("Ingrese una opcion valida");
+
+      }
+    } while (true);
   }
 
   private static void mostrarVentas() {
     //mostrar ventas
-    
- 
+
     System.out.println("[0] Retornar");
   }
 

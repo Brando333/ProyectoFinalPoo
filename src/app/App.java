@@ -14,7 +14,6 @@ public class App {
   public static List<Vendedor> vendedoresRegistrados = new ArrayList<>();
   public static List<Cliente> clientesRegistrados = new ArrayList<>();
 
-
   public static void main(String... brando) {
     menuPrincipal();
   }

@@ -10,13 +10,54 @@ public class MenuCliente {
   }
 
   public static void menuCliente() {
-    System.out.println("[1] MOSTRAR INVENTARIO");
-    System.out.println("[2] MOSTRAR OFERTAS DE DESCUENTO");
-    System.out.println("[3] HACER COMPRA");
-    System.out.println("[4] MOSTRAR CARRITO");
-    System.out.println("[5] CANCELAR COMPRA");
-    System.out.println("[6] EFECTUAR COMPRA");
-    System.out.println("[0] RETORNAR");
+    System.out.println("\n::Menu Principal");
+    System.out.println("::Menu Cliente");
+    int opcion;
+
+    exitDo:
+    do {
+      System.out.println("[1] MOSTRAR INVENTARIO");
+      System.out.println("[2] MOSTRAR OFERTAS DE DESCUENTO");
+      System.out.println("[3] HACER COMPRA");
+      System.out.println("[4] MOSTRAR CARRITO");
+      System.out.println("[5] CANCELAR COMPRA");
+      System.out.println("[6] EFECTUAR COMPRA");
+      System.out.println("[0] RETORNAR");
+      opcion = new Scanner(System.in).nextInt();
+
+      switch (opcion) {
+        case 1:
+
+          break exitDo;
+
+        case 2:
+
+          break exitDo;
+
+        case 3:
+
+          break exitDo;
+
+        case 4:
+
+          break exitDo;
+        case 5:
+
+          break exitDo;
+        case 6:
+
+          break exitDo;
+
+        case 0:
+          MenuPrincipal.menuPrincipal();
+          break exitDo;
+
+        default:
+          System.out.println("Ingrese una opcion valida");
+
+      }
+    } while (true);
+
   }
 
   private static void mostrarInventario() {
@@ -24,17 +65,16 @@ public class MenuCliente {
 //    for (Producto producto : col) {
 //      
 //    }
-        
+
   }
 
   private static void hacerCompraMenu() {
 
     //mostrar inventario
-    String contraseñaDefault ="camote123";
-    String userDefault ="Brando123";
+    String contraseñaDefault = "camote123";
+    String userDefault = "Brando123";
     System.out.println("¿Que producto desea añadir al carrito?");
     String producto = new Scanner(System.in).next();
-    
 
     System.out.println("¿Cuantos productos {$producto} desea añadir");
 
