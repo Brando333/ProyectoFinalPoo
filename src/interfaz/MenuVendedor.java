@@ -1,64 +1,69 @@
 package interfaz;
 
+import app.App;
+import domain.Producto;
 import java.util.Scanner;
 
 public class MenuVendedor {
 
-  //Las clases de Utileria no deberian poder instanciarse
-  private MenuVendedor() {
-  }
+    //Las clases de Utileria no deberian poder instanciarse
+    private MenuVendedor() {
+    }
 
-  public static void menuVendedor() {
+    public static void menuVendedor() {
 
-    int opcion;
-    exitDo:
-    do {
-      System.out.println("\n::Menu principal");
-      System.out.println("::Menu vendedor");
-      System.out.println("[1] MOSTRAR VENTAS");
-      System.out.println("[2] MOSTRAR INVENTARIO");
-      System.out.println("[3] MOSTRAR CLIENTES");
-      System.out.println("[0] RETORNAR");
-      opcion = new Scanner(System.in).nextInt();
+        int opcion;
+        exitDo:
+        do {
+            System.out.println("\n::Menu principal");
+            System.out.println("::Menu vendedor");
+            System.out.println("[1] MOSTRAR VENTAS");
+            System.out.println("[2] MOSTRAR INVENTARIO");
+            System.out.println("[3] MOSTRAR CLIENTES");
+            System.out.println("[0] RETORNAR");
+            opcion = new Scanner(System.in).nextInt();
 
-      switch (opcion) {
-        case 1:
+            switch (opcion) {
+                case 1:
 
-          break exitDo;
+                    break exitDo;
 
-        case 2:
+                case 2:
 
-          break exitDo;
+                    for (Producto producto : App.inventario) {
+                        System.out.println(producto);
+                    }
+                    break exitDo;
 
-        case 3:
+                case 3:
 
-          break exitDo;
+                    break exitDo;
 
-        case 0:
-          MenuPrincipal.menuPrincipal();
-          break exitDo;
+                case 0:
+                    MenuPrincipal.menuPrincipal();
+                    break exitDo;
 
-        default:
-          System.out.println("Ingrese una opcion valida");
+                default:
+                    System.out.println("Ingrese una opcion valida");
 
-      }
-    } while (true);
-  }
+            }
+        } while (true);
+    }
 
-  private static void mostrarVentas() {
-    //mostrar ventas
+    private static void mostrarVentas() {
+        //mostrar ventas
 
-    System.out.println("[0] Retornar");
-  }
+        System.out.println("[0] Retornar");
+    }
 
-  private static void mostrarInventario() {
-    //mostrar inventario -> nombre y precio
-    System.out.println("[0] Retornar");
-  }
+    private static void mostrarInventario() {
+        //mostrar inventario -> nombre y precio
+        System.out.println("[0] Retornar");
+    }
 
-  private static void mostrarClientes() {
-    // Mostrar registro de clientes -> Datos, inversion
+    private static void mostrarClientes() {
+        // Mostrar registro de clientes -> Datos, inversion
 
-  }
+    }
 
 }
