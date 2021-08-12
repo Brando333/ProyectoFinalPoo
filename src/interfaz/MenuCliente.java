@@ -1,104 +1,106 @@
 package interfaz;
 
-import app.App;
-import domain.Producto;
+import domain.producto.Lacteos;
 import java.util.Scanner;
+import utileria.Utileria;
+import utileria.UtileriaException;
 
-public class MenuCliente {
+public class MenuCliente implements IMostrable {
 
-    //Las clases de utileria no deberian tener constructores
-    private MenuCliente() {
-    }
+  //Las clases de utileria no deberian tener constructores
+  private MenuCliente() {
+  }
 
-    public static void menuCliente() {
-        System.out.println("\n::Menu Principal");
-        System.out.println("::Menu Cliente");
-        int opcion;
+  public static void menuCliente() {
+    System.out.println("\n::Menu Principal");
+    System.out.println("::Menu Cliente");
+    int opcion;
 
-        exitDo:
-        do {
-            System.out.println("[1] MOSTRAR INVENTARIO");
-            System.out.println("[2] MOSTRAR OFERTAS DE DESCUENTO");
-            System.out.println("[3] HACER COMPRA");
-            System.out.println("[4] MOSTRAR CARRITO");
-            System.out.println("[5] CANCELAR COMPRA");
-            System.out.println("[6] EFECTUAR COMPRA");
-            System.out.println("[0] RETORNAR");
-            opcion = new Scanner(System.in).nextInt();
+    exitDo:
+    do {
+      System.out.println("[1] MOSTRAR INVENTARIO");
+      System.out.println("[2] MOSTRAR OFERTAS DE DESCUENTO");
+      System.out.println("[3] HACER COMPRA");
+      System.out.println("[4] MOSTRAR CARRITO");
+      System.out.println("[5] CANCELAR COMPRA");
+      System.out.println("[6] EFECTUAR COMPRA");
+      System.out.println("[0] RETORNAR");
+      opcion = new Scanner(System.in).nextInt();
 
-            switch (opcion) {
-                case 1:
+      switch (opcion) {
+        case 1:
 
-                    mostrarInventario();
-                    break exitDo;
+          break exitDo;
 
-                case 2:
+        case 2:
 
-                    break exitDo;
+          break exitDo;
 
-                case 3:
+        case 3:
 
-                    break exitDo;
+          break exitDo;
 
-                case 4:
+        case 4:
 
-                    break exitDo;
-                case 5:
+          break exitDo;
+        case 5:
 
-                    break exitDo;
-                case 6:
+          break exitDo;
+        case 6:
 
-                    break exitDo;
+          break exitDo;
 
-                case 0:
-                    MenuPrincipal.menuPrincipal();
-                    break exitDo;
+        case 0:
+          MenuPrincipal.menuPrincipal();
+          break exitDo;
 
-                default:
-                    System.out.println("Ingrese una opcion valida");
+        default:
+          System.out.println("Ingrese una opcion valida");
 
-            }
-        } while (true);
+      }
+    } while (true);
 
-    }
+  }
 
-    private static void mostrarInventario() {
-        for (Producto producto : App.inventario) {
-            System.out.println(producto);
-        }
+  private static void hacerCompraMenu() {
 
-    }
+    //mostrar inventario
+    String contraseñaDefault = "camote123";
+    String userDefault = "Brando123";
+    System.out.println("¿Que producto desea añadir al carrito?");
+    String producto = new Scanner(System.in).next();
 
-    private static void hacerCompraMenu() {
+    System.out.println("¿Cuantos productos {$producto} desea añadir");
 
-        //mostrar inventario
-        String contraseñaDefault = "camote123";
-        String userDefault = "Brando123";
-        System.out.println("¿Que producto desea añadir al carrito?");
-        String producto = new Scanner(System.in).next();
+    System.out.println("[0] Retornar");
+  }
 
-        System.out.println("¿Cuantos productos {$producto} desea añadir");
+  private static void mostrarCarrito() {
+    //mostrar carrito
+  }
 
-        System.out.println("[0] Retornar");
-    }
+  private static void cancelarCompraMenu() {
 
-    private static void mostrarCarrito() {
-        //mostrar carrito
-    }
+    //mostrar carrito
+    System.out.println("¿Que producto desea cancelar?");
 
-    private static void cancelarCompraMenu() {
+    System.out.println("[0] Retornar");
 
-        //mostrar carrito
-        System.out.println("¿Que producto desea cancelar?");
+  }
 
-        System.out.println("[0] Retornar");
-
-    }
-
-    private static void efectuarCompra() {
+  private static void efectuarCompra() {
 //    
-        System.out.println("Compra efectuada!!");
+    System.out.println("Compra efectuada!!");
 
-    }
+  }
+
+  @Override
+  public void mostrarInventario() {
+//    try {
+//      Utileria.mostrarHeaderInventario("Lacteos"+"ID Producto Marca Precio Unidad", new Lacteos());
+//    } catch (UtileriaException e) {
+//      System.err.println(e.getMessage());
+//    }
+  }
 
 }

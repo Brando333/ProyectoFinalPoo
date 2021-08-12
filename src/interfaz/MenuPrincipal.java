@@ -1,8 +1,8 @@
 package interfaz;
 
 import app.App;
-import domain.Cliente;
-import domain.Vendedor;
+import domain.cliente.Cliente;
+import domain.cliente.Vendedor;
 import java.util.Scanner;
 
 public class MenuPrincipal {

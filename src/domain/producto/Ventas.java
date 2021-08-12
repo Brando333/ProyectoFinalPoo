@@ -1,4 +1,6 @@
-package domain;
+package domain.producto;
+
+import domain.cliente.Cliente;
 
 public class Ventas {
 

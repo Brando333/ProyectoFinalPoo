@@ -1,166 +1,214 @@
 package interfaz;
 
 import app.App;
-import domain.Cliente;
-import domain.Usuario;
-import domain.Vendedor;
+import domain.cliente.Cliente;
+import domain.cliente.Usuario;
+import domain.cliente.Vendedor;
+import exceptions.DNIFormatException;
+import exceptions.FormatException;
+import exceptions.NombreFormatException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utileria.Utileria;
 
 public class MenuRegistro {
 
-    static Cliente nuevoCliente; //despues de haberse registrado almacenará este cliente a un arreglo de {clientesRegistrados} 
-    static Vendedor nuevoVendedor;//despues de haberse registrado almacenará este vendeor a un arreglo de {vendedoresRegistrados} 
+  static Cliente nuevoCliente; //despues de haberse registrado almacenará este cliente a un arreglo de {clientesRegistrados} 
+  static Vendedor nuevoVendedor;//despues de haberse registrado almacenará este vendeor a un arreglo de {vendedoresRegistrados} 
 
-    //Las clases de Utileria no deberian poder instanciarse
-    private MenuRegistro() {
-    }
+  //Las clases de Utileria no deberian poder instanciarse
+  private MenuRegistro() {
+  }
 
-    static void menuRegistrarse() {
-        int opcion;
-        System.out.println("\n::Menu Principal");
-        System.out.println("::Registro");
-        System.out.println("[1] Registrarse como vendedor");
-        System.out.println("[2] Registrarse como cliente");
-        System.out.println("[0] Retornar");
-        opcion = new Scanner(System.in).nextInt();
-        exitDo:
-        do {
-            switch (opcion) {
-                case 1:
-                    registrarseComoVendedor();
-                    break exitDo;
+  static void menuRegistrarse() {
+    int opcion;
+    System.out.println("\n::Menu Principal");
+    System.out.println("::Registro");
+    System.out.println("[1] Registrarse como vendedor");
+    System.out.println("[2] Registrarse como cliente");
+    System.out.println("[0] Retornar");
+    opcion = new Scanner(System.in).nextInt();
+    exitDo:
+    do {
+      switch (opcion) {
+        case 1:
+          try {
+          registrarseComoVendedor();
+        } catch (Exception e) {
+          //Si se lanza una excepcion de fomato en el metodo {RegistrarComoVendedor()}, se vuelve a menu superior
+          menuRegistrarse();
+        }
+        break exitDo;
 
-                case 2:
-                    registrarseComoCliente();
-                    break exitDo;
+        case 2: {
 
-                case 0:
-                    MenuPrincipal.menuPrincipal();
-                    break exitDo;
+          try {
+            registrarseComoCliente();
+          } catch (FormatException ex) {
+            menuRegistrarse();
+          }
 
-                default:
-                    System.out.println("Ingrese una opcion valida");
+        }
+        break exitDo;
 
-            }
-        } while (true);
-    }
+        case 0:
+          MenuPrincipal.menuPrincipal();
+          break exitDo;
 
-    private static void registrarseComoVendedor() {
-        System.out.println("::Menu");
-        System.out.println("::Registro");
-        System.out.println("::Registrarse como vendedor");
-        int opcion;
+        default:
+          System.out.println("Ingrese una opcion valida");
 
-        System.out.println("[1] Continuar");
-        System.out.println("[0] Cancelar");
-        opcion = new Scanner(System.in).nextInt();
-        exitDo:
-        do {
-            switch (opcion) {
-                case 1:
-                    Scanner input = new Scanner(System.in);
+      }
+    } while (true);
+  }
 
-                    String nombreComleto;
-                    String dni;
-                    String usuario;
-                    String contraseña;
+  private static void registrarseComoVendedor() throws FormatException { //FormatException es superclase de NOmbreFormateXCEPTION Y DNIFormatException
+    System.out.println("::Menu");
+    System.out.println("::Registro");
+    System.out.println("::Registrarse como vendedor");
+    int opcion;
 
-                    System.out.print("\nIngrese su nombre completo: ");
-                    nombreComleto = input.nextLine();
-                    System.out.print("Ingrese su dni: ");
-                    dni = input.nextLine();
-                    System.out.print("Ingrese su nombre de usuario: ");
-                    usuario = input.nextLine();
-                    System.out.print("Ingrese su contraseña: ");
-                    contraseña = input.nextLine();
+    System.out.println("[1] Continuar");
+    System.out.println("[0] Cancelar");
+    opcion = new Scanner(System.in).nextInt();
+    exitDo:
+    do {
+      switch (opcion) {
+        case 1:
+          Scanner input = new Scanner(System.in);
 
-                    nuevoVendedor = new Vendedor(usuario, dni, usuario, contraseña);
-//          nuevoVendedor = (( Vendedor )registroUsuario()); //DownCast de Usuario a Vendedor
-                    //Añadimos nuevoVendedor a un Arreglo de {VendedoresRegistrados}
-                    App.vendedoresRegistrados.add(nuevoVendedor);
-                    System.out.println("Su registro ha sido guardado con exito");
-                    break exitDo;
+          String nombreComleto;
+          String dni;
+          String usuario;
+          String contraseña;
 
-                case 0:
-                    MenuPrincipal.menuPrincipal();
-                    break exitDo;
+          //Ingresamos nombre
+          System.out.print("\nIngrese su nombre completo: ");
+          nombreComleto = input.nextLine();
 
-                default:
-                    System.out.println("Ingrese una opcion valida");
+          //si el nombre no tiene un formato de nombre[a-zA-Z], entonces se lanza excepcion
+          if (!nombreComleto.matches("[a-zA-Z ]+")) {
+            throw new NombreFormatException("El nombre debe tener solo letras");
+          }
 
-            }
-        } while (true);
+          //Ingresamos DNI
+          System.out.print("Ingrese su dni: ");
+          dni = input.nextLine();
 
-    }
+          //Se lanza la excepcion con un mensaje de acuerdo al contexto
+          /*Cuando el DNI contiene letras o caracteres especiales*/
+          if (dni.matches("\\d*\\D+\\d*")) {
+            throw new DNIFormatException("Error, el DNI contiene letras o caracteres especiales");
+          }
+          /*Cuando el DNI no tiene 8 digitos*/
+          if (dni.length() != 8) {
+            throw new DNIFormatException("Error, el DNI debe contener 8 digitos");
+          }
 
-    private static void registrarseComoCliente() {
-        System.out.println("::Menu");
-        System.out.println("::Registro");
-        System.out.println("::Registrarse como cliente");
-        int opcion;
+          //Ingresamos usuario
+          System.out.print("Ingrese su nombre de usuario: ");
+          usuario = input.nextLine();
 
-        System.out.println("[1] Continuar");
-        System.out.println("[0] Cancelar");
-        opcion = new Scanner(System.in).nextInt();
-        exitDo:
-        do {
-            switch (opcion) {
-                case 1:
+          //Ingresamos contraseña
+          System.out.print("Ingrese su contraseña: ");
+          contraseña = input.nextLine();
 
-                    Scanner input = new Scanner(System.in);
+          //Le damos un formato al nombre con la primera letra Mayuscula y las demas minusculas
+          nombreComleto = Utileria.formatoNombre(nombreComleto);
 
-                    String nombreComleto;
-                    String dni;
-                    String usuario;
-                    String contraseña;
+          nuevoVendedor = new Vendedor(nombreComleto, dni, usuario, contraseña);
 
-                    System.out.print("\nIngrese su nombre completo: ");
-                    nombreComleto = input.nextLine();
-                    System.out.print("Ingrese su dni: ");
-                    dni = input.nextLine();
-                    System.out.print("Ingrese su nombre de usuario: ");
-                    usuario = input.nextLine();
-                    System.out.print("Ingrese su contraseña: ");
-                    contraseña = input.nextLine();
+          //Añadimos nuevoVendedor a un Arreglo de {VendedoresRegistrados}
+          App.vendedoresRegistrados.add(nuevoVendedor);
+          System.out.println("Su registro ha sido guardado con exito");
+          break exitDo;
 
-                    nuevoCliente = new Cliente(usuario, dni, usuario, contraseña);
-//          nuevoCliente = (( Cliente )registroUsuario()); //DownCast de Usuario a Cliente
-//          Añadimos nuevoVendedor a un Arreglo de {VendedoresRegistrados}
-                    App.clientesRegistrados.add(nuevoCliente);
-                    System.out.println("Su registro ha sido guardado con exito");
-                    break exitDo;
+        case 0:
+          MenuPrincipal.menuPrincipal();
+          break exitDo;
 
-                case 0:
-                    MenuPrincipal.menuPrincipal();
-                    break exitDo;
+        default:
+          System.out.println("Ingrese una opcion valida");
 
-                default:
-                    System.out.println("Ingrese una opcion valida");
+      }
+    } while (true);
 
-            }
-        } while (true);
+  }
 
-    }
+  private static void registrarseComoCliente() throws FormatException {
+    System.out.println("::Menu");
+    System.out.println("::Registro");
+    System.out.println("::Registrarse como cliente");
+    int opcion;
 
-    private static Usuario registroUsuario() {
+    System.out.println("[1] Continuar");
+    System.out.println("[0] Cancelar");
+    opcion = new Scanner(System.in).nextInt();
+    exitDo:
+    do {
+      switch (opcion) {
+        case 1:
 
-        Scanner input = new Scanner(System.in);
+          Scanner input = new Scanner(System.in);
 
-        String nombreComleto;
-        String dni;
-        String usuario;
-        String contraseña;
+          String nombreComleto;
+          String dni;
+          String usuario;
+          String contraseña;
 
-        System.out.print("\nIngrese su nombre completo: ");
-        nombreComleto = input.nextLine();
-        System.out.print("Ingrese su dni: ");
-        dni = input.nextLine();
-        System.out.print("Ingrese su nombre de usuario: ");
-        usuario = input.nextLine();
-        System.out.print("Ingrese su contraseña: ");
-        contraseña = input.nextLine();
+          //Ingresamos nombre
+          System.out.print("\nIngrese su nombre completo: ");
+          nombreComleto = input.nextLine();
 
-        return new Usuario(usuario, dni, usuario, contraseña);
-    }
+          //si el nombre no tiene un formato de nombre[a-zA-Z], entonces se lanza excepcion
+          if (!nombreComleto.matches("[a-zA-Z ]+")) {
+            throw new NombreFormatException("El nombre debe tener solo letras");
+          }
+
+          //Ingresamos DNI
+          System.out.print("Ingrese su dni: ");
+          dni = input.nextLine();
+
+          //Se lanza la excepcion con un mensaje de acuerdo al contexto
+          /*Cuando el DNI contiene letras o caracteres especiales*/
+          if (dni.matches("\\d*\\D+\\d*")) {
+            throw new DNIFormatException("Error, el DNI contiene letras o caracteres especiales");
+          }
+          /*Cuando el DNI no tiene 8 digit os*/
+          if (dni.length() != 8) {
+            throw new DNIFormatException("Error, el DNI debe contener 8 digitos");
+          }
+
+          //Ingresamos usuario
+          System.out.print("Ingrese su nombre de usuario: ");
+          usuario = input.nextLine();
+
+          //Ingresamos contraseña
+          System.out.print("Ingrese su contraseña: ");
+          contraseña = input.nextLine();
+
+          //Le damos un formato al nombre con la primera letra Mayuscula y las demas minusculas
+          nombreComleto = Utileria.formatoNombre(nombreComleto);
+
+          nuevoCliente = new Cliente(usuario, dni, usuario, contraseña);
+
+          //Añadismos al nuevoCliente al arreglo de clientes registrados
+          App.clientesRegistrados.add(nuevoCliente);
+
+          System.out.println("Su registro ha sido guardado con exito");
+          break exitDo;
+
+        case 0:
+          MenuPrincipal.menuPrincipal();
+          break exitDo;
+
+        default:
+          System.out.println("Ingrese una opcion valida");
+
+      }
+    } while (true);
+
+  }
 
 }

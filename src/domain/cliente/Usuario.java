@@ -1,6 +1,6 @@
-package domain;
+package domain.cliente;
 
-public class Usuario {
+public abstract class Usuario {
 
 
   /*Atributos*/

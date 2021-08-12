@@ -1,4 +1,4 @@
-package domain;
+package domain.cliente;
 
 public class Vendedor extends Usuario {
 
