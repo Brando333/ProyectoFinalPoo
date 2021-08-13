@@ -1,10 +1,17 @@
 package interfaz;
 
-import app.App;
-import domain.producto.Producto;
+import domain.producto.Abarrote;
+import domain.producto.AguasBebidas;
+import domain.producto.CarnesAvesPescados;
+import domain.producto.Desayuno;
+import domain.producto.Lacteos;
+import domain.producto.Limpieza;
+import domain.producto.Mascotas;
+import domain.producto.TipoProducto;
 import java.util.Scanner;
+import utileria.Utileria;
 
-public class MenuVendedor implements IMostrable {
+public class MenuVendedor {
 
   //Las clases de Utileria no deberian poder instanciarse
   private MenuVendedor() {
@@ -30,9 +37,17 @@ public class MenuVendedor implements IMostrable {
 
         case 2:
 
-          for (Producto producto : App.inventario) {
-            System.out.println(producto);
+          String elementosCabezera = String.format("%-4s", "ID") + String.format("%-30s", "Producto")
+              + String.format("%-16s", "Marca") + String.format("%-8s", "Precio") + String.format("%-18s", "Unidad")
+              + String.format("%-10s", "Cantidad");
+
+          TipoProducto[] tiposProductos = {Abarrote.getInstance(), AguasBebidas.getInstance(), CarnesAvesPescados.getInstance(),
+            Desayuno.getInstance(), Lacteos.getInstance(), Limpieza.getInstance(), Mascotas.getInstance()};
+
+          for (TipoProducto tipoProducto : tiposProductos) {
+            Utileria.mostarInventario(tipoProducto.getClass().getSimpleName(), elementosCabezera, "Vendedor");
           }
+
           break exitDo;
 
         case 3:
@@ -59,11 +74,6 @@ public class MenuVendedor implements IMostrable {
   private static void mostrarClientes() {
     // Mostrar registro de clientes -> Datos, inversion
 
-  }
-
-  @Override
-  public void mostrarInventario() {
-    
   }
 
 }

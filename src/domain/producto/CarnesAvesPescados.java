@@ -6,4 +6,8 @@ public class CarnesAvesPescados extends TipoProducto {
     super();
   }
 
+  public static CarnesAvesPescados getInstance() {
+    return new CarnesAvesPescados();
+  }
+
 }

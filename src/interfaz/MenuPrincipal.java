@@ -12,9 +12,9 @@ public class MenuPrincipal {
   }
 
   public static void menuPrincipal() {
-    System.out.println("\n::Menu Principal");
     int opcion;
     do {
+      System.out.println("\n::Menu Principal");
       System.out.println("[1] ENTRAR COMO VENDEDOR");
       System.out.println("[2] ENTRAR COMO CLIENTE");
       System.out.println("[3] REGISTRARSE");

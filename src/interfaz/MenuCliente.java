@@ -1,13 +1,10 @@
 package interfaz;
 
-import domain.producto.Lacteos;
 import java.util.Scanner;
-import utileria.Utileria;
-import utileria.UtileriaException;
 
-public class MenuCliente implements IMostrable {
+public class MenuCliente {
 
-  //Las clases de utileria no deberian tener constructores
+  // Las clases de utileria no deberian tener constructores
   private MenuCliente() {
   }
 
@@ -64,7 +61,7 @@ public class MenuCliente implements IMostrable {
 
   private static void hacerCompraMenu() {
 
-    //mostrar inventario
+    // mostrar inventario
     String contraseñaDefault = "camote123";
     String userDefault = "Brando123";
     System.out.println("¿Que producto desea añadir al carrito?");
@@ -76,12 +73,12 @@ public class MenuCliente implements IMostrable {
   }
 
   private static void mostrarCarrito() {
-    //mostrar carrito
+    // mostrar carrito
   }
 
   private static void cancelarCompraMenu() {
 
-    //mostrar carrito
+    // mostrar carrito
     System.out.println("¿Que producto desea cancelar?");
 
     System.out.println("[0] Retornar");
@@ -89,18 +86,9 @@ public class MenuCliente implements IMostrable {
   }
 
   private static void efectuarCompra() {
-//    
+    //
     System.out.println("Compra efectuada!!");
 
-  }
-
-  @Override
-  public void mostrarInventario() {
-//    try {
-//      Utileria.mostrarHeaderInventario("Lacteos"+"ID Producto Marca Precio Unidad", new Lacteos());
-//    } catch (UtileriaException e) {
-//      System.err.println(e.getMessage());
-//    }
   }
 
 }

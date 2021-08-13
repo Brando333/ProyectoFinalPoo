@@ -6,4 +6,8 @@ public class Lacteos extends TipoProducto {
     super();
   }
 
+  public static Lacteos getInstance() {
+    return new Lacteos();
+  }
+
 }

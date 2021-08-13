@@ -6,4 +6,7 @@ public class Desayuno extends TipoProducto {
     super();
   }
 
+  public static Desayuno getInstance() {
+    return new Desayuno();
+  }
 }

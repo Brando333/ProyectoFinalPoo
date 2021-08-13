@@ -1,5 +1,7 @@
 package domain.cliente;
 
+import utileria.Utileria;
+
 public class Vendedor extends Usuario {
 
   /*Atributos*/
@@ -11,6 +13,22 @@ public class Vendedor extends Usuario {
     super(nombre, dni, usuario, contraseña);
     idVendedor = ++contadorId;
   }
+
+  /**
+   * Este constructor solo nos sirve para poder declarar el metodo
+   * {@code getInstance()} en el metodo {@code mostrarInventario()} de la clase Utileria
+   *
+   * @see Utileria
+   */
+  private Vendedor() {
+    idVendedor = 0;
+  }
+
+  public static Vendedor getInstance() {
+    return new Vendedor();
+
+  }
+
 
   /*toString()*/
   @Override

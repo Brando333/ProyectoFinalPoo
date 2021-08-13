@@ -6,4 +6,8 @@ public class AguasBebidas extends TipoProducto {
     super();
   }
 
+  public static AguasBebidas getInstance() {
+    return new AguasBebidas();
+  }
+
 }

@@ -6,4 +6,8 @@ public class Abarrote extends TipoProducto {
     super();
   }
 
+  public static Abarrote getInstance() {
+    return new Abarrote();
+  }
+
 }

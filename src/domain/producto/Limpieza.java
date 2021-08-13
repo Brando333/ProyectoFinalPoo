@@ -6,4 +6,8 @@ public class Limpieza extends TipoProducto {
     super();
   }
 
+  public static Limpieza getInstance() {
+    return new Limpieza();
+  }
+
 }

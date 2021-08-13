@@ -17,6 +17,10 @@ public abstract class Usuario {
     this.contrasenia = contrasenia;
   }
 
+  /*Constructor*/
+  public Usuario() {
+  }
+
   /*Setters & Getters*/
   public String getNombre() {
     return nombre;
